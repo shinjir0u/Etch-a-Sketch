@@ -46,15 +46,17 @@
 .grid-container {
     margin: 20px;
     border: 2px solid rgb(14, 46, 223);
+    min-width: 840px;
 }
 
 .grid {
+    padding: 20px;
     min-height: 800px;
     min-width: 800px;
     display: flex;
-    gap: 20px;
+    gap: 5px;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     align-content: center;
 }
 

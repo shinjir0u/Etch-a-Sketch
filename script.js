@@ -14,3 +14,28 @@ Pseudocode
         IF mouse pointer is over the element
             SET the color of the box black
 */
+
+const container = document.querySelector(".grid");
+
+for (let i = 0; i < 16; i++) {
+    const verticalContainer = document.createElement("div");
+    for (let i = 0; i < 16; i++) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+        box.style = `border: 2px solid black; 
+                    min-width: 40px; 
+                    min-height: 40px;
+                    flex: auto;`;
+        box.addEventListener("mouseover", hoverChange);
+        verticalContainer.appendChild(box);
+    }
+    verticalContainer.style.cssText = `display: flex;
+                                        flex-direction: column;
+                                        gap: 5px;
+                                        flex: auto;`;
+    container.appendChild(verticalContainer);
+}
+
+function hoverChange(event) {
+    event.target.style.backgroundColor = "black";
+}
