@@ -36,6 +36,7 @@ manualGridButton.addEventListener("click", () => {
     removeBoxes(container);
     if (manualGrid > 0 && manualGrid <= 100) {
         grid = manualGrid;
+        resetDefaultButton.style.display = "block";
         displayGrid(container, manualGrid);
     }
     else {
@@ -50,6 +51,7 @@ resetButton.addEventListener("click", () => {
 });
 
 resetDefaultButton.addEventListener("click", () => {
+    resetDefaultButton.style.display = "none";
     removeBoxes(container);
     displayGrid(container, DEFAULT_GRID);
 });
@@ -82,10 +84,31 @@ function createBoxes(verticalContainer, grid) {
 function removeBoxes(container) {
     for (let child of Array.from(container.children)) {
         child.remove();
-        console.log(child);
     }
 }
 
 function hoverChange(event) {
-    event.target.style.backgroundColor = "black";
+    let defaultOpacity = 0.1;
+    let randomColorCombination = `rgb(${randomColor()},${randomColor()},${randomColor()}, ${defaultOpacity})`;
+    let backgroundColour = event.target.style.backgroundColor;
+    if (isEmptyString(backgroundColour))
+        event.target.style.backgroundColor = randomColorCombination;
+    else {
+        let backgroundColourSplit = backgroundColour.split(/0.|\)/);
+        let backgroundColourCode = backgroundColourSplit[0];
+        let backgroundOpacity = backgroundColourSplit[1];
+        if (backgroundOpacity < 10) {
+            backgroundOpacity = (Number(backgroundOpacity) + 1) / 10;
+            let color = backgroundColourCode + `${backgroundOpacity})`;
+            event.target.style.backgroundColor = color;
+        }
+    }
+}
+
+function randomColor() {
+    return Math.floor(Math.random() * 256);
+}
+
+function isEmptyString(string) {
+    return string === "";
 }

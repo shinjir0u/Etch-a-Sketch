@@ -60,5 +60,7 @@
     align-content: center;
 }
 
-
+.grid-reset-default {
+    display: none;
+}
 
